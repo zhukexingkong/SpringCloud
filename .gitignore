@@ -1,0 +1,3 @@
+eureka_server/target/
+consumer_service/target/
+provider_service/target/
