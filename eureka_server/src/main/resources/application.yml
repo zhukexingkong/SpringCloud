@@ -12,7 +12,7 @@ eureka:
     register-with-eureka: false     # register self
   server:
     enable-self-preservation: false # close self preservation
-    eviction-interval-timer-in-ms: 90 # delete service time
+    eviction-interval-timer-in-ms: 90000 # delete service time, ms
 
 
 
