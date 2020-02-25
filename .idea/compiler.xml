@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="eureka_server" />
         <module name="provider_service" />
         <module name="consumer_service" />
         <module name="SpringCloud" />
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="SpringCloud" options="-parameters" />
       <module name="consumer_service" options="-parameters" />
+      <module name="eureka_server" options="-parameters" />
       <module name="provider_service" options="-parameters" />
     </option>
   </component>
