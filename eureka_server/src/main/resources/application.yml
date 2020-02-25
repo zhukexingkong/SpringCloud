@@ -15,4 +15,3 @@ eureka:
     eviction-interval-timer-in-ms: 90000 # delete service time, ms
 
 
-

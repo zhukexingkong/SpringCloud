@@ -16,3 +16,8 @@ eureka:
     instanceId: ${spring.cloud.client.ip-address}:${server.port}
     lease-renewal-interval-in-seconds: 30       # heartbeat time
     lease-expiration-duration-in-seconds: 90    # expiration time
+
+# ribbon method
+provider-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule

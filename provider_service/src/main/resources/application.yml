@@ -1,6 +1,6 @@
 # port
 server:
-  port: 8080
+  port: ${port:8080}
 
 # scan beans
 mybatis:
@@ -35,5 +35,4 @@ eureka:
     instanceId: ${spring.cloud.client.ip-address}:${server.port}
     lease-renewal-interval-in-seconds: 30       # heartbeat time
     lease-expiration-duration-in-seconds: 90    # expiration time
-
 

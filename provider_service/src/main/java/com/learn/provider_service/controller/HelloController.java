@@ -44,6 +44,7 @@ public class HelloController {
 
     @GetMapping("/findById")
     public User findById(Integer id){
+        logger.info("findById");
         return userMapper.findById(id);
     }
 }
