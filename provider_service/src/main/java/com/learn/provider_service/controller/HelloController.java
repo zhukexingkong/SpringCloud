@@ -4,6 +4,7 @@ import com.learn.provider_service.bean.User;
 import com.learn.provider_service.mappers.UserMapper;
 import org.apache.logging.log4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,9 @@ public class HelloController {
         userMapper.update(user);
     }
 
+    @Value("${server.port}")
+    private String port;
+
     @GetMapping("/findAll")
     public List<User> findAll(){
         logger.info("findAll");
@@ -44,7 +48,10 @@ public class HelloController {
 
     @GetMapping("/findById")
     public User findById(Integer id){
-        logger.info("findById");
-        return userMapper.findById(id);
+        String info = "端口: " + port + " 被调用";
+        logger.info(info);
+        User user = userMapper.findById(id);
+        user.setNote(info);
+        return user;
     }
 }
