@@ -52,6 +52,11 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <!--熔断Hystrix starter-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
     </dependencies>
     <!--SpringCloud所有依赖管理的坐标-->
     <dependencyManagement>

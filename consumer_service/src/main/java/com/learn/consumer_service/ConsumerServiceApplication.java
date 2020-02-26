@@ -1,11 +1,12 @@
 package com.learn.consumer_service;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.SpringCloudApplication;
 
-@SpringBootApplication
-@EnableDiscoveryClient
+//@SpringBootApplication
+//@EnableDiscoveryClient
+//@EnableCircuitBreaker
+@SpringCloudApplication
 public class ConsumerServiceApplication {
 
     public static void main(String[] args) {

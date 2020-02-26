@@ -1,5 +1,6 @@
 package com.learn.consumer_service.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -41,10 +42,17 @@ public class ConsumerController {
 //    }
 
     @RequestMapping("/consumer/{id}")
-    public String findById(@PathVariable("id") Integer id){
+    @HystrixCommand(fallbackMethod ="findByIdFallback")
+    public String findById(@PathVariable("id") Long id) {
+        if(1 == id){
+            throw new RuntimeException("too busy!!!");
+        }
         String url = String.format("http://provider-service/user/findById?id=%d", id);
         String jsonResult = restTemplate.getForObject(url, String.class);
         return jsonResult;
     }
 
+    public String findByIdFallback(Long id) {
+        return "对不起，网络太拥挤了！";
+    }
 }
