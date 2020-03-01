@@ -48,11 +48,11 @@ public class HelloController {
 
     @GetMapping("/findById")
     public User findById(Integer id){
-        try {
-            Thread.sleep(3000);// 3 > consumer中的hystrix的timeoutInMilliseconds配置时间，就会调用降级方法
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(3000);// 3 > consumer中的hystrix的timeoutInMilliseconds配置时间，就会调用降级方法
+//        } catch (InterruptedException e){
+//            e.printStackTrace();
+//        }
         String info = "端口: " + port + " 被调用";
         logger.info(info);
         User user = userMapper.findById(id);
