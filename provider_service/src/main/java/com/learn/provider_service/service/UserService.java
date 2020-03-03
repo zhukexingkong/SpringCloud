@@ -1,36 +1,30 @@
-package com.learn.provider_service.controller;
+package com.learn.provider_service.service;
 
 import com.learn.provider_service.bean.User;
 import com.learn.provider_service.mappers.UserMapper;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/user")
-public class HelloController {
+@Service
+public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    private static Logger logger = LogManager.getLogger(HelloController.class);
+    private static Logger logger = LogManager.getLogger(UserService.class);
 
-    @PostMapping("/save")
     public void save(User user){
         userMapper.save(user);
     }
 
-    @PostMapping("/delete")
     public void delete(Integer id){
         userMapper.delete(id);
     }
 
-    @PostMapping("/update")
     public void update(User user){
         userMapper.update(user);
     }
@@ -38,7 +32,6 @@ public class HelloController {
     @Value("${server.port}")
     private String port;
 
-    @GetMapping("/findAll")
     public List<User> findAll(){
         logger.info("findAll");
         logger.error("findAll");
@@ -46,7 +39,6 @@ public class HelloController {
         return userMapper.findAll();
     }
 
-    @GetMapping("/findById")
     public User findById(Integer id){
 //        try {
 //            Thread.sleep(3000);// 3 > consumer中的hystrix的timeoutInMilliseconds配置时间，就会调用降级方法

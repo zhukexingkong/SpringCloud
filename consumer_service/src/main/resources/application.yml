@@ -20,7 +20,7 @@ eureka:
 # ribbon method
 provider-service:
   ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule  #默认
 
 # 配置熔断策略-会找不到但是起作用：
 hystrix:
