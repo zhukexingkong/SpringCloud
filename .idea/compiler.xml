@@ -9,6 +9,7 @@
         <module name="eureka_server" />
         <module name="provider_service" />
         <module name="consumer_service" />
+        <module name="gateway_service" />
         <module name="SpringCloud" />
       </profile>
     </annotationProcessing>
@@ -18,6 +19,7 @@
       <module name="SpringCloud" options="-parameters" />
       <module name="consumer_service" options="-parameters" />
       <module name="eureka_server" options="-parameters" />
+      <module name="gateway_service" options="-parameters" />
       <module name="provider_service" options="-parameters" />
     </option>
   </component>

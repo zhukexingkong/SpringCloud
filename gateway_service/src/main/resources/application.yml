@@ -1,0 +1,24 @@
+server:
+  port: 10010
+
+spring:
+  application:
+    name: api-gateway # 应用名
+
+  cloud:
+    gateway: # 路由si(集合)
+      routes: # id唯一标识
+        - id: provider-service-route # 路由服务地址
+          uri: lb://provider-service # 路由地址如果通过lb协议加服务名称时，会自动使用负载均衡访问对应服务
+        # 断言
+          predicates:
+            - Path=/**     #将http://localhost:10010/user/findById?id=2 路由到 http://localhost:8083/user/findById?id=2
+          # 请求地址添加路径前缀过滤器
+          filters:
+            - PrefixPath=/user
+
+# Eureka服务中心配置
+eureka:
+  client:
+    service-url: # 注册中心Eureka服务地址
+      defaultZone: http://127.0.0.1:10086/eureka
