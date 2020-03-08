@@ -1,7 +1,10 @@
 package com.learn.consumer_service.controller;
 
+import com.learn.consumer_service.bean.User;
+import com.learn.consumer_service.service.ProviderService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,9 +19,11 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8080")
 //@CrossOrigin(origins = "*")
 public class ConsumerController {
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Autowired
-    RestTemplate restTemplate;
+    private ProviderService providerService;
 
     /**
      * discoveryClient 服务注册中心客户端对象，存储了服务的访问地址
@@ -45,14 +50,19 @@ public class ConsumerController {
 //    }
 
     @RequestMapping("/consumer/{id}")
-    @HystrixCommand(fallbackMethod ="findByIdFallback")
+    @HystrixCommand(fallbackMethod = "findByIdFallback")
     public String findById(@PathVariable("id") Long id) {
-        if(1 == id){
+        if (1 == id) {
             throw new RuntimeException("too busy!!!");
         }
         String url = String.format("http://provider-service/user/findById?id=%d", id);
         String jsonResult = restTemplate.getForObject(url, String.class);
         return jsonResult;
+    }
+
+    @RequestMapping("/feignFindById/{id}")
+    public User feignFindById(@PathVariable Integer id) {
+        return providerService.findById(id);
     }
 
     public String findByIdFallback(Long id) {
