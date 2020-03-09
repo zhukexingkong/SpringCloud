@@ -1,6 +1,6 @@
 package com.learn.provider_service.controller;
 
-import com.learn.provider_service.bean.User;
+import com.learn.provider_service.entity.User;
 import com.learn.provider_service.service.UserService;
 import org.apache.logging.log4j.*;
 import org.springframework.beans.factory.annotation.Autowired;

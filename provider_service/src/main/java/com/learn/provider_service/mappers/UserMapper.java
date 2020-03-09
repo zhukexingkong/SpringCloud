@@ -1,6 +1,6 @@
 package com.learn.provider_service.mappers;
 
-import com.learn.provider_service.bean.User;
+import com.learn.provider_service.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 

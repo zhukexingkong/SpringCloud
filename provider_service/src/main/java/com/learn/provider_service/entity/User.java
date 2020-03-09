@@ -1,4 +1,4 @@
-package com.learn.provider_service.bean;
+package com.learn.provider_service.entity;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

@@ -4,7 +4,7 @@ server:
 
 # scan beans
 mybatis:
-  type-aliases-package: com.learn.provider_service.bean
+  type-aliases-package: com.learn.provider_service.entity
   # mapper.xml path
   mapper-locations: classpath:mappers/*Mapper.xml
 
@@ -23,6 +23,22 @@ spring:
   #server id
   application:
     name: provider-service
+
+  #JPA
+  jpa:
+    database: MYSQL
+    # Show or not log for each sql query
+    show-sql: true
+    hibernate:
+      # Hibernate ddl auto (create, create-drop, update)
+      ddl-auto: update #每次运行程序，没有表格会新建表格，表内有数据不会清空，只会更新
+      naming:
+        #默认命名策略：直接映射，不会做过多的处理（前提没有设置@Table，@Column等属性的时候）
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:
+      hibernate:
+        # 回滚,tripped before adding them to the entity manager
+        dialect: org.hibernate.dialect.MySQL5Dialect
 
 #connfig Eureka
 eureka:

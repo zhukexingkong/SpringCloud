@@ -1,6 +1,6 @@
 package com.learn.provider_service.service;
 
-import com.learn.provider_service.bean.User;
+import com.learn.provider_service.entity.User;
 import com.learn.provider_service.mappers.UserMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
