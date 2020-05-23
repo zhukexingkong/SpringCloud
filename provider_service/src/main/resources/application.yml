@@ -40,6 +40,13 @@ spring:
         # 回滚,tripped before adding them to the entity manager
         dialect: org.hibernate.dialect.MySQL5Dialect
 
+  #RabbitMQ
+  rabbitmq:
+    host: localhost
+    port: 5672    #默认端口，web界面: localhost:15672
+    username: guest
+    password: guest
+
 #connfig Eureka
 eureka:
   client:
