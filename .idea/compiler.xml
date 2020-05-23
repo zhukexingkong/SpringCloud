@@ -2,15 +2,16 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka_server" />
         <module name="provider_service" />
+        <module name="SpringCloud" />
         <module name="consumer_service" />
         <module name="gateway_service" />
-        <module name="SpringCloud" />
       </profile>
     </annotationProcessing>
   </component>

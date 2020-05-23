@@ -2,3 +2,5 @@ eureka_server/target/
 consumer_service/target/
 provider_service/target/
 gateway_service/target/
+out/artifacts/
+.idea/

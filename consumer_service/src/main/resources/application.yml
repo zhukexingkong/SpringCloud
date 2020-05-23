@@ -1,11 +1,20 @@
 server:
-  port: 8082
+  port: 9001
 
 spring:
   application:
     name: consumer-service
 
-#connfig Eureka
+  thymeleaf:
+    cache: false  #关闭缓存
+    prefix: classpath:/template/
+    suffix: .html
+    #      mode: LEGACYHTML5
+    encoding: UTF-8
+    #thymeleaf end
+    servlet:
+      content-type: text/html
+
 eureka:
   client:
     service-url:
