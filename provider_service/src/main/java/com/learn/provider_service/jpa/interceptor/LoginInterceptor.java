@@ -31,21 +31,21 @@ public class LoginInterceptor implements HandlerInterceptor {
             logger.info(LogUtils.getRequestLog(request));
             //校验用户是否已经登录,如果登录过,将之前用户踢掉,同时更新缓存中用户信息
             Subject subject = SecurityUtils.getSubject();
-            Serializable token = subject.getSession().getId();
+            Serializable sessionId = subject.getSession().getId();
             RedisManager redisManager = RedisManager.getRedisSingleton();
             //获取用户id
-            String userId = redisManager.get("sys:login:user_token_"+token.toString());
+            String userId = redisManager.get("sys:login:user_token_"+sessionId.toString());
             if(StringUtils.isNotBlank(userId)) {
-                String tokenPre = redisManager.get("sys:user:id_"+userId);
-                if(!token.equals(tokenPre)) {
+                String sessionIdPre = redisManager.get("sys:user:id_"+userId);
+                if(!sessionId.equals(sessionIdPre)) {
                     //重定向到login.html
                     redirect(request, response);
                     return false;
                 }else {
-                    Long expire = redisManager.ttl("sys:login:user_token_"+token.toString());
+                    Long expire = redisManager.ttl("sys:login:user_token_"+sessionId.toString());
                     //过期时间小于1分钟的,更新token
                     if(expire < 1 * 60 * 1000) {
-                        redisManager.expire("sys:login:user_token_"+token.toString(), 60*30);
+                        redisManager.expire("sys:login:user_token_"+sessionId.toString(), 60*30);
                     }
                 }
             }else {

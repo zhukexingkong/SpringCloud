@@ -31,12 +31,14 @@ public class LoginServiceImpl implements LoginService {
             e.printStackTrace();
         }
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        Subject subject = SecurityUtils.getSubject();
-        subject.login(token);
+        //每个shiro拦截到的请求，都会根据seesionid创建Subject,清除当前线程的绑定，然后重新绑定的线程中，之后执行过滤器。
+        //所以我们再SecurityUtils.getSubject()中获取的一直是当前用户的信息
+        Subject currentUser = SecurityUtils.getSubject();
+        currentUser.login(token);
         //获取用户
         UserInfo userInfo = userService.findByUsername(username);
-        //token
-        Serializable sessionId = subject.getSession().getId();
+        //token/session
+        Serializable sessionId = currentUser.getSession().getId();
         //将token放入redis
         RedisManager manager = RedisManager.getRedisSingleton();
         manager.set("sys:login:user_token_"+sessionId.toString(),userInfo.getUid()+"",60*30);
