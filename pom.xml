@@ -11,6 +11,8 @@
         <shiro-spring.version>1.4.0</shiro-spring.version>
         <fastjson.version>1.2.68</fastjson.version>
         <nekohtml.version>1.9.15</nekohtml.version>
+        <mybatis.version>2.1.1</mybatis.version>
+        <java.version>1.8</java.version>
     </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -19,6 +21,11 @@
     </parent>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
             <!-- shiro模板 -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
