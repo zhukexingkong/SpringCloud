@@ -7,6 +7,11 @@
     <groupId>com.learn</groupId>
     <artifactId>springcloud_parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <properties>
+        <shiro-spring.version>1.4.0</shiro-spring.version>
+        <fastjson.version>1.2.68</fastjson.version>
+        <nekohtml.version>1.9.15</nekohtml.version>
+    </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -14,6 +19,24 @@
     </parent>
     <dependencyManagement>
         <dependencies>
+            <!-- shiro模板 -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro-spring.version}</version>
+            </dependency>
+            <!--json解析-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- html解析器 -->
+            <dependency>
+                <groupId>net.sourceforge.nekohtml</groupId>
+                <artifactId>nekohtml</artifactId>
+                <version>${nekohtml.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
