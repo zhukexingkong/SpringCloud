@@ -9,8 +9,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka_server" />
         <module name="provider_service" />
-        <module name="gateway_service" />
         <module name="consumer_service" />
+        <module name="gateway_service" />
         <module name="SpringCloud" />
       </profile>
     </annotationProcessing>
