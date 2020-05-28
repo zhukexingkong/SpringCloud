@@ -2,7 +2,7 @@ package com.learn.provider_service;
 import java.util.*;
 
 public class CyclicDependencyDetector {
-    class Module {
+    static class Module {
         private String name;
         private Set<String> dependencies;
 
@@ -20,15 +20,24 @@ public class CyclicDependencyDetector {
         }
     }
 
-    private static HashMap<String, com.learn.provider_service.arithmetic.CycleDepend.Module> moduleHashMap = new HashMap<>();
+    private static HashMap<String, Module> moduleHashMap = new HashMap<>();
 
     // 判断循环依赖
-    public static void checkCyclicDependency(List<com.learn.provider_service.arithmetic.CycleDepend.Module> moduleList, com.learn.provider_service.arithmetic.CycleDepend.Module startModule) {
+    public static void checkCyclicDependency(List<Module> moduleList, Module startModule) {
         getModuleHashMap(moduleList);
+        // 检查有没有依赖自身
+        String selfName = startModule.getName();
+        for(String oneName : startModule.getDependencies()){
+            if(oneName.equals(selfName)){
+                System.out.println("startModule依赖自己");
+            }
+        }
+
+        // 依赖的循环依赖
         // 排序
         List<String> dependencyOrderList = new ArrayList<>();
         for(String oneName : startModule.getDependencies()){
-            com.learn.provider_service.arithmetic.CycleDepend.Module oneModule = moduleHashMap.get(oneName);
+            Module oneModule = moduleHashMap.get(oneName);
             for(String nextName : oneModule.getDependencies()) {
                 addDependencyOrderList(dependencyOrderList, oneName, nextName);
             }
@@ -92,35 +101,35 @@ public class CyclicDependencyDetector {
     }
 
     // 获取Module HashMap
-    public static void getModuleHashMap(List<com.learn.provider_service.arithmetic.CycleDepend.Module> moduleList){
-        for(com.learn.provider_service.arithmetic.CycleDepend.Module module1 : moduleList){
+    public static void getModuleHashMap(List<Module> moduleList){
+        for(Module module1 : moduleList){
             moduleHashMap.put(module1.getName(), module1);
         }
     }
 
     public static void main(String[] args) {
-        com.learn.provider_service.arithmetic.CycleDepend.Module A = new com.learn.provider_service.arithmetic.CycleDepend.Module("A", new HashSet<String>(){{
+        Module A = new Module("A", new HashSet<String>(){{
             add("B");
             add("C");
             add("D");
         }});
-        com.learn.provider_service.arithmetic.CycleDepend.Module B = new com.learn.provider_service.arithmetic.CycleDepend.Module("B",new HashSet<String>(){{
+        Module B = new Module("B",new HashSet<String>(){{
             add("C");
             add("F");
         }});
-        com.learn.provider_service.arithmetic.CycleDepend.Module C = new com.learn.provider_service.arithmetic.CycleDepend.Module("C",new HashSet<String>(){{
+        Module C = new Module("C",new HashSet<String>(){{
             add("A");
             add("F");
         }});
-        com.learn.provider_service.arithmetic.CycleDepend.Module D = new com.learn.provider_service.arithmetic.CycleDepend.Module("D",null);
-        com.learn.provider_service.arithmetic.CycleDepend.Module F = new com.learn.provider_service.arithmetic.CycleDepend.Module("F",null);
-        List<com.learn.provider_service.arithmetic.CycleDepend.Module> moduleList = new ArrayList<>();
+        Module D = new Module("D",null);
+        Module F = new Module("F",null);
+        List<Module> moduleList = new ArrayList<>();
         moduleList.add(A);
         moduleList.add(B);
         moduleList.add(C);
         moduleList.add(D);
         moduleList.add(F);
-        com.learn.provider_service.arithmetic.CycleDepend.Module startModule  = new com.learn.provider_service.arithmetic.CycleDepend.Module("startModule", new HashSet<String>(){{
+        Module startModule  = new Module("startModule", new HashSet<String>(){{
             add("A");
             add("B");
             add("C");
