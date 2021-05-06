@@ -59,3 +59,6 @@ eureka:
     lease-renewal-interval-in-seconds: 30       # heartbeat time
     lease-expiration-duration-in-seconds: 90    # expiration time
 
+#模拟数据开关: true-模拟数据 false-实际数据
+mock:
+  mockFlag: true
