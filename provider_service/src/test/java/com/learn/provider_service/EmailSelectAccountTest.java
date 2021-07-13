@@ -38,10 +38,13 @@ public class EmailSelectAccountTest {
                         for(int k = 1; k < accountInfo[i].length; k++){
                             valuePut.add(accountInfo[i][k]);
                         }
-                        break;
+                        break; // 终结3循环
                     }
                 }
 
+                if(!newAccount){
+                    break; // 终结2循环
+                }
             }
             // new account
             if(newAccount){

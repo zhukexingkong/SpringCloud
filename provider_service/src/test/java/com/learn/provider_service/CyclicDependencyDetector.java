@@ -25,17 +25,15 @@ public class CyclicDependencyDetector {
     // 判断循环依赖
     public static void checkCyclicDependency(List<Module> moduleList, Module startModule) {
         getModuleHashMap(moduleList);
-        // 检查有没有依赖自身
+
+        List<String> dependencyOrderList = new ArrayList<>();
+        // 自身
         String selfName = startModule.getName();
         for(String oneName : startModule.getDependencies()){
-            if(oneName.equals(selfName)){
-                System.out.println("startModule依赖自己");
-            }
+            addDependencyOrderList(dependencyOrderList, selfName, oneName);
         }
-
         // 依赖的循环依赖
         // 排序
-        List<String> dependencyOrderList = new ArrayList<>();
         for(String oneName : startModule.getDependencies()){
             Module oneModule = moduleHashMap.get(oneName);
             for(String nextName : oneModule.getDependencies()) {
@@ -49,19 +47,19 @@ public class CyclicDependencyDetector {
     }
 
     // 排序
-    private static void addDependencyOrderList(List<String> dependencyOrderList, String oneName, String nextName) {
+    private static void addDependencyOrderList(List<String> dependencyOrderList, String selfName, String dependencyName) {
         boolean existLastChar = false;
         List<String> newOrderList = new ArrayList<>();
         for(String orderStr : dependencyOrderList) {
-            if(getLastChar(orderStr).equals(oneName)){
+            if(getLastChar(orderStr).equals(selfName)){
                 existLastChar = true;
-                newOrderList.add(orderStr + nextName);
+                newOrderList.add(orderStr + dependencyName);
             }
         }
         if(existLastChar){
             dependencyOrderList.addAll(newOrderList);
         }else {
-            dependencyOrderList.add(oneName + nextName);
+            dependencyOrderList.add(selfName + dependencyName);
         }
     }
 
@@ -129,7 +127,7 @@ public class CyclicDependencyDetector {
         moduleList.add(C);
         moduleList.add(D);
         moduleList.add(F);
-        Module startModule  = new Module("startModule", new HashSet<String>(){{
+        Module startModule  = new Module("O", new HashSet<String>(){{
             add("A");
             add("B");
             add("C");

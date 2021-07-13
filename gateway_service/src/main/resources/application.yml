@@ -7,12 +7,19 @@ spring:
 
   cloud:
     gateway: # 路由si(集合)
+#      discovery:
+#        locator:
+#          enabled: true   #从Eureka拉取服务列表并自动映射
       routes: # id唯一标识
         - id: provider-service-route # 路由服务地址
           uri: lb://provider-service # 路由地址如果通过lb协议加服务名称时，会自动使用负载均衡访问对应服务
         # 断言
           predicates:
             - Path=/**     #将http://localhost:10010/user/findById?id=2 路由到 http://localhost:8083/user/findById?id=2
+            #- Query=id,.   #匹配参数id,至少传1个id
+            #- Method=get   #只匹配get请求
+            #- Host=worker   #要有Host参数=worker
+            #- Cookie=name,zhangsan  #要有cookie: name=zhangsan
           # 请求地址添加路径前缀过滤器
           filters:
             - PrefixPath=/user
