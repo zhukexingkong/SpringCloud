@@ -4,3 +4,4 @@ provider_service/target/
 gateway_service/target/
 out/artifacts/
 .idea/
+*.iml
