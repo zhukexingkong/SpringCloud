@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <shiro-spring.version>1.4.0</shiro-spring.version>
-        <fastjson.version>1.2.68</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <nekohtml.version>1.9.15</nekohtml.version>
         <mybatis.version>2.1.1</mybatis.version>
         <java.version>1.8</java.version>
